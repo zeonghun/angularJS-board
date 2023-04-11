@@ -66,9 +66,17 @@ public class BoardController {
      * @since 2023.04.11
      */
     @PostMapping
-    public BoardDTO createBoard(@RequestBody BoardDTO board) {
+    public ResponseEntity<BoardDTO> createBoard(@RequestBody BoardDTO board) {
+        List<BoardDTO> boardList = service.findAll();
+
+        for (int i = 0; i < boardList.size(); i++) {
+            if (boardList.get(i).getBno() == board.getBno()) {
+                return ResponseEntity.badRequest().build();
+            }
+        }
         service.boards.add(board);
-        return board;
+
+        return new ResponseEntity<>(board, HttpStatus.OK);
     }
 
     /**
@@ -80,8 +88,19 @@ public class BoardController {
      * @since 2023.04.11
      */
     @DeleteMapping("/delete/{bno}")
-    public BoardDTO deleteBoard(@PathVariable int bno) {
-        return service.deleteById(bno);
+    public ResponseEntity<BoardDTO> deleteBoard(@PathVariable int bno) {
+        List<BoardDTO> boardList = service.findAll();
+        BoardDTO boardDto = new BoardDTO(bno, null, null, null);
+
+        for (int i = 0; i < boardList.size(); i++) {
+            if (boardList.get(i).getBno() == bno) {
+                boardDto = boardList.get(i);
+                service.deleteById(bno);
+
+                return new ResponseEntity<>(boardDto, HttpStatus.OK);
+            }
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     /**
