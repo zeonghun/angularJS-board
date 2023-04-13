@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.ymtech.ojt.http_method.board.dto.BoardDTO;
 import kr.ymtech.ojt.http_method.board.dto.UpdateBoardResDTO;
-import kr.ymtech.ojt.http_method.board.service.BoardDaoService;
+import kr.ymtech.ojt.http_method.board.service.ImPL.BoardDaoService;
 
 /**
  * 게시판 목록 출력

@@ -1,4 +1,4 @@
-package kr.ymtech.ojt.http_method.board.service;
+package kr.ymtech.ojt.http_method.board.service.ImPL;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -7,9 +7,10 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import kr.ymtech.ojt.http_method.board.dto.BoardDTO;
+import kr.ymtech.ojt.http_method.board.service.IBoardDaoService;
 
 @Service
-public class BoardDaoService {
+public class BoardDaoService implements IBoardDaoService {
 
     /**
      * 게시판 목록 리스트
@@ -38,6 +39,11 @@ public class BoardDaoService {
         return boards;
     }
 
+    @Override
+    public List<BoardDTO> findALL() {
+        throw new UnsupportedOperationException("Unimplemented method 'findALL'");
+    }
+
     /**
      * 게시판 특정 목록 조회
      * 
@@ -57,6 +63,11 @@ public class BoardDaoService {
         return null;
     }
 
+    @Override
+    public List<BoardDTO> findOne() {
+        throw new UnsupportedOperationException("Unimplemented method 'findOne'");
+    }
+
     /**
      * 게시판 특정 목록 삭제
      * 
@@ -67,6 +78,7 @@ public class BoardDaoService {
      * @author zeonghun
      * @since 2023.04.11
      */
+    @Override
     public BoardDTO deleteById(int bno) {
         Iterator<BoardDTO> iterator = boards.iterator();
         // iterator 안에 다음 값이 들어있을 경우
@@ -81,16 +93,17 @@ public class BoardDaoService {
         }
         return null;
     }
-    
+
     /**
      * 게시판 목록 수정
      * 
-     * @param num 수정할 게시판 번호
+     * @param num   수정할 게시판 번호
      * @param board 수정 내용
      * 
      * @author zeonghun
      * @since 2023.04.11
      */
+    @Override
     public void updateById(int num, BoardDTO board) {
         // 기존 게시판에 수정할 내용 저장
         boards.get(num).setTitle(board.getTitle());
