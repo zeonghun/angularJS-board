@@ -132,8 +132,13 @@ public class BoardController {
         }
 
         // bno가 num인 게시판 객체 생성
-        BoardDTO old = new BoardDTO(boardList.get(num).getBno(), boardList.get(num).getTitle(),
-                boardList.get(num).getWriter(), boardList.get(num).getContent());
+        BoardDTO dto = boardList.get(num);
+        BoardDTO old = new BoardDTO(dto.getBno(), dto.getTitle(), dto.getWriter(), dto.getContent());
+
+        // // bno가 num인 게시판 객체 생성
+        // BoardDTO old = new BoardDTO(boardList.get(num).getBno(),
+        // boardList.get(num).getTitle(),
+        // boardList.get(num).getWriter(), boardList.get(num).getContent());
 
         // 기존 게시판 저장
         resDto.setOld(old);
