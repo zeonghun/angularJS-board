@@ -18,7 +18,7 @@ import kr.ymtech.ojt.http_method.board.dto.UpdateBoardResDTO;
 import kr.ymtech.ojt.http_method.board.service.IBoardService;
 
 /**
- * 게시물 조회, 추가, 수정, 삭제
+ * 게시물 조회, 추가, 삭제, 수정
  * 
  * @author zeonghun
  * @since 2023.04.17
@@ -44,9 +44,9 @@ public class BoardController {
     }
 
     /**
-     * 특정 게시물 출력
+     * 게시물 출력
      * 
-     * @return 특정 게시물 조회
+     * @return 게시물 조회
      * 
      * @author zeonghun
      * @since 2023.04.17
@@ -91,8 +91,7 @@ public class BoardController {
      * @since 2023.04.17
      */
     @PatchMapping
-    public ResponseEntity<BoardDTO> updateBoard(@RequestBody BoardDTO board) {
-
+    public ResponseEntity<UpdateBoardResDTO> updateBoard(@RequestBody BoardDTO board) {
         return service.updateBoard(board);
     }
 }

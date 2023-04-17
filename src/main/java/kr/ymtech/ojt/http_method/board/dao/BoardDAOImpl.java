@@ -49,8 +49,9 @@ public class BoardDAOImpl implements IBoardDAO {
         }
 
         try (
-                Connection con = DriverManager.getConnection(DB_URL, DB_USER_ID, DB_USER_PASSWORD);
-                PreparedStatement stmt = con.prepareStatement(Query.BOARD_READ_ALL);) {
+            Connection con = DriverManager.getConnection(DB_URL, DB_USER_ID, DB_USER_PASSWORD);
+            PreparedStatement stmt = con.prepareStatement(Query.BOARD_READ_ALL);
+            ) {
             rs = stmt.executeQuery();
             while (rs.next()) {
                 int bno = rs.getInt("bno");
@@ -62,6 +63,7 @@ public class BoardDAOImpl implements IBoardDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return boardVOList;
     }
 
@@ -83,8 +85,9 @@ public class BoardDAOImpl implements IBoardDAO {
         }
 
         try (
-                Connection con = DriverManager.getConnection(DB_URL, DB_USER_ID, DB_USER_PASSWORD);
-                PreparedStatement stmt = con.prepareStatement(Query.BOARD_READ);) {
+            Connection con = DriverManager.getConnection(DB_URL, DB_USER_ID, DB_USER_PASSWORD);
+            PreparedStatement stmt = con.prepareStatement(Query.BOARD_READ);
+            ) {
             stmt.setInt(1, bno);
             rs = stmt.executeQuery();
 
@@ -97,6 +100,7 @@ public class BoardDAOImpl implements IBoardDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
         return boardVO;
     }
 
@@ -115,14 +119,14 @@ public class BoardDAOImpl implements IBoardDAO {
         }
 
         try (
-                Connection con = DriverManager.getConnection(DB_URL, DB_USER_ID, DB_USER_PASSWORD);
-                PreparedStatement stmt = con.prepareStatement(Query.BOARD_INSERT);) {
+            Connection con = DriverManager.getConnection(DB_URL, DB_USER_ID, DB_USER_PASSWORD);
+            PreparedStatement stmt = con.prepareStatement(Query.BOARD_INSERT);
+            ) {
             stmt.setInt(1, board.getBno());
             stmt.setString(2, board.getTitle());
             stmt.setString(3, board.getWriter());
             stmt.setString(4, board.getContent());
             stmt.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -148,7 +152,6 @@ public class BoardDAOImpl implements IBoardDAO {
             ) {
             stmt.setInt(1, bno);
             stmt.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -160,18 +163,18 @@ public class BoardDAOImpl implements IBoardDAO {
      * @author zeonghun
      * @since 2023.04.17
      */
-    public void updateBoard(BoardDTO board){
+    public void updateBoard(BoardDTO board) {
         try (
             Connection con = DriverManager.getConnection(DB_URL, DB_USER_ID, DB_USER_PASSWORD);
             PreparedStatement stmt = con.prepareStatement(Query.BOARD_UPDATE);
             ) {
-                stmt.setString(1, board.getTitle());
-                stmt.setString(2, board.getWriter());
-                stmt.setString(3, board.getContent());
-                stmt.setInt(4, board.getBno());
-                stmt.executeUpdate();
-            } catch(SQLException e) {
-                e.printStackTrace();
-            }
+            stmt.setString(1, board.getTitle());
+            stmt.setString(2, board.getWriter());
+            stmt.setString(3, board.getContent());
+            stmt.setInt(4, board.getBno());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

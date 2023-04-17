@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import kr.ymtech.ojt.http_method.board.dao.IBoardDAO;
 import kr.ymtech.ojt.http_method.board.dto.BoardDTO;
+import kr.ymtech.ojt.http_method.board.dto.UpdateBoardResDTO;
 import kr.ymtech.ojt.http_method.board.vo.BoardVO;
 
 @Service
@@ -17,21 +18,6 @@ public class BoardServiceImpl implements IBoardService {
 
     @Autowired
     private IBoardDAO dao;
-
-    // /**
-    // * 게시판 목록 리스트
-    // *
-    // * @author zeonghun
-    // * @since 2023.04.11
-    // */
-    // public List<BoardDTO> boards = new ArrayList<>();
-    // {
-    // boards.add(new BoardDTO(1, "test", "관리자", "test 입니다."));
-    // boards.add(new BoardDTO(2, "스프링 설명서", "익명1", "Spring 어떻게 쓰나요?"));
-    // boards.add(new BoardDTO(3, "annotation 사용하기", "익명2", "@Controller 사용하기"));
-    // boards.add(new BoardDTO(4, "스프링부트란 무엇인가", "김정훈", "자바 프레임워크"));
-    // boards.add(new BoardDTO(5, "mysql과 mariadb의 차이", "홍길동", "차이가 무엇일까?"));
-    // }
 
     /**
      * @see IBoardService#findAll()
@@ -75,38 +61,79 @@ public class BoardServiceImpl implements IBoardService {
      * @author zeonghun
      * @since 2023.04.17
      */
-    public ResponseEntity<BoardDTO> createBoard(BoardDTO board){
+    public ResponseEntity<BoardDTO> createBoard(BoardDTO board) {
+        List<BoardDTO> boardList = this.findAll();
+
+        for (int i = 0; i < boardList.size(); i++) {
+            if (boardList.get(i).getBno() == board.getBno()) {
+                return ResponseEntity.badRequest().build();
+            }
+        }
         dao.createBoard(board);
 
         return new ResponseEntity<>(board, HttpStatus.OK);
     }
 
-
     /**
-    * @see IBoardService#deleteBoard(int bno)
-    *
-    * @author zeonghun
-    * @since 2023.04.17
-    */
+     * @see IBoardService#deleteBoard(int bno)
+     *
+     * @author zeonghun
+     * @since 2023.04.17
+     */
     @Override
     public ResponseEntity<BoardDTO> deleteBoard(int bno) {
+        List<BoardDTO> boardList = this.findAll();
         BoardDTO boardDTO = new BoardDTO(bno, null, null, null);
 
-        dao.deleteBoard(bno);
+        for (int i = 0; i < boardList.size(); i++) {
+            if (boardList.get(i).getBno() == bno) {
+                boardDTO = boardList.get(i);
+                dao.deleteBoard(bno);
 
-        return new ResponseEntity<>(boardDTO, HttpStatus.OK);
+                return new ResponseEntity<>(boardDTO, HttpStatus.OK);
+            }
+        }
+        return ResponseEntity.badRequest().build();
     }
 
     /**
-    * @see IBoardService#updateBoard(BoardDTO board)
-    *
-    * @author zeonghun
-    * @since 2023.04.17
-    */
+     * @see IBoardService#updateBoard(BoardDTO board)
+     *
+     * @author zeonghun
+     * @since 2023.04.17
+     */
     @Override
-    public ResponseEntity<BoardDTO> updateBoard(BoardDTO board) {
+    public ResponseEntity<UpdateBoardResDTO> updateBoard(BoardDTO board) {
+        List<BoardDTO> boardList = this.findAll();
+        UpdateBoardResDTO resDTO = new UpdateBoardResDTO();
+        int num = -1;
+
+        for (int i = 0; i < boardList.size(); i++) {
+            // 게시물 전체중에 수정할 게시물 번호가 있는 경우
+            if (boardList.get(i).getBno() == board.getBno()) {
+                num = i;
+                break;
+            }
+        }
+
+        // 수정할 게시물 번호가 없는 경우
+        if (num == -1) {
+            return ResponseEntity.badRequest().build();
+        }
+
+        // bno가 num인 게시물 객체 생성
+        BoardDTO dto = boardList.get(num);
+        BoardDTO old = new BoardDTO(dto.getBno(), dto.getTitle(), dto.getWriter(), dto.getContent());
+
+        // 기존 게시물 저장
+        resDTO.setOld(old);
+
+        // 수정 게시물 저장
+        resDTO.setUpdate(board);
+
+        // 게시물 수정
         dao.updateBoard(board);
 
-        return new ResponseEntity<>(board, HttpStatus.OK);
+        return new ResponseEntity<>(resDTO, HttpStatus.OK);
     }
 }

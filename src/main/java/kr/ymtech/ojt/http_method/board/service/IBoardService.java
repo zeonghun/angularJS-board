@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import kr.ymtech.ojt.http_method.board.dto.BoardDTO;
+import kr.ymtech.ojt.http_method.board.dto.UpdateBoardResDTO;
 
 public interface IBoardService {
 
@@ -19,11 +20,11 @@ public interface IBoardService {
     public List<BoardDTO> findAll();
 
     /**
-     * 특정 게시물 조회
+     * 게시물 조회
      * 
      * @param bno 조회할 게시물 번호
      * 
-     * @return 특정 게시물
+     * @return 조회 게시물
      * 
      * @author zeonghun
      * @since 2023.04.17
@@ -64,5 +65,5 @@ public interface IBoardService {
      * @author zeonghun
      * @since 2023.04.17
      */
-    public ResponseEntity<BoardDTO> updateBoard(BoardDTO board);
+    public ResponseEntity<UpdateBoardResDTO> updateBoard(BoardDTO board);
 }

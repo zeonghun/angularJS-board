@@ -6,11 +6,11 @@ import kr.ymtech.ojt.http_method.board.dto.BoardDTO;
 import kr.ymtech.ojt.http_method.board.vo.BoardVO;
 
 public interface IBoardDAO {
-    
+
     /**
      * 전체 게시물 조회
      * 
-     * @return 전체 게시물 리스트
+     * @return 전체 게시물
      * 
      * @author zeonghun
      * @since 2023.04.17
@@ -18,11 +18,11 @@ public interface IBoardDAO {
     public List<BoardVO> findAll();
 
     /**
-     * 특정 게시물 조회
+     * 게시물 조회
      * 
      * @param bno 조회할 게시물 번호
      * 
-     * @return 특정 게시물 객체
+     * @return 조회 게시물
      * 
      * @author zeonghun
      * @since 2023.04.17
@@ -50,7 +50,7 @@ public interface IBoardDAO {
     public void deleteBoard(int bno);
 
     /**
-     * 게시물 수정
+     * 게시물 수정UpdateBoardResDTO
      * 
      * @param board 수정할 게시물
      * 

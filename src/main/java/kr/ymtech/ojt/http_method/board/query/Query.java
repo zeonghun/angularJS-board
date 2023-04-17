@@ -11,7 +11,7 @@ public class Query {
     // 전체 게시물 조회
     public static final String BOARD_READ_ALL = "SELECT * FROM board";
 
-    // 특정 게시물 조회
+    // 게시물 조회
     public static final String BOARD_READ = "SELECT * FROM board WHERE bno = ?";
 
     // 게시물 추가
