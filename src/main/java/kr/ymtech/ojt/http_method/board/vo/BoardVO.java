@@ -1,6 +1,4 @@
-package kr.ymtech.ojt.http_method.board.dto;
-
-import kr.ymtech.ojt.http_method.board.vo.BoardVO;
+package kr.ymtech.ojt.http_method.board.vo;
 
 /**
  * 게시물 항목 저장 클래스
@@ -8,24 +6,20 @@ import kr.ymtech.ojt.http_method.board.vo.BoardVO;
  * @author zeonghun
  * @since 2023.04.17
  */
-public class BoardDTO {
+public class BoardVO {
     private int bno;
     private String title;
     private String writer;
     private String content;
 
-    public BoardDTO(int bno, String title, String writer, String content) {
+    public BoardVO() {
+    }
+
+    public BoardVO(int bno, String title, String writer, String content) {
         this.bno = bno;
         this.title = title;
         this.writer = writer;
         this.content = content;
-    }
-
-    public BoardDTO(BoardVO boardVO) {
-        this.bno = boardVO.getBno();
-        this.title = boardVO.getTitle();
-        this.writer = boardVO.getWriter();
-        this.content = boardVO.getContent();
     }
 
     public int getBno() {

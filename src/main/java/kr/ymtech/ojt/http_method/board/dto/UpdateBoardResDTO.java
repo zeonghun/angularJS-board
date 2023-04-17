@@ -4,7 +4,7 @@ package kr.ymtech.ojt.http_method.board.dto;
  * 기존, 업데이트 정보 저장 클래스
  * 
  * @author zeonghun
- * @since 2023.04.11
+ * @since 2023.04.17
  */
 public class UpdateBoardResDTO {
 
