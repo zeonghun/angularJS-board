@@ -12,9 +12,6 @@ public class BoardVO {
     private String writer;
     private String content;
 
-    public BoardVO() {
-    }
-
     public BoardVO(int bno, String title, String writer, String content) {
         this.bno = bno;
         this.title = title;
