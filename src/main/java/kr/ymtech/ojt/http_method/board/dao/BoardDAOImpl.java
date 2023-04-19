@@ -20,10 +20,10 @@ import kr.ymtech.ojt.http_method.board.vo.BoardVO;
 @Repository
 public class BoardDAOImpl implements IBoardDAO {
 
-    // template 정의
+    // Template 정의
     private JdbcTemplate jdbcTemplate;
 
-    // DataSource 절달
+    // DataSource 전달
     public BoardDAOImpl(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
