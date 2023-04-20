@@ -2,8 +2,7 @@ package kr.ymtech.ojt.http_method.board.dao;
 
 import java.util.List;
 
-import javax.sql.DataSource;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -20,13 +19,8 @@ import kr.ymtech.ojt.http_method.board.vo.BoardVO;
 @Repository
 public class BoardDAOImpl implements IBoardDAO {
 
-    // Template 정의
+    @Autowired
     private JdbcTemplate jdbcTemplate;
-
-    // DataSource 전달
-    public BoardDAOImpl(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
-    }
 
     /**
      * @see IBoardDAO#findAll()
@@ -72,10 +66,11 @@ public class BoardDAOImpl implements IBoardDAO {
      * @since 2023.04.19
      */
     @Override
-    public void createBoard(BoardDTO board) {
-        jdbcTemplate.update(
+    public int createBoard(BoardDTO board) {
+        int result = jdbcTemplate.update(
                 Query.BOARD_INSERT,
                 board.getBno(), board.getTitle(), board.getWriter(), board.getContent());
+        return result;
     }
 
     /**
@@ -85,10 +80,11 @@ public class BoardDAOImpl implements IBoardDAO {
      * @since 2023.04.19
      */
     @Override
-    public void deleteBoard(int bno) {
-        jdbcTemplate.update(
+    public int deleteBoard(int bno) {
+        int result = jdbcTemplate.update(
                 Query.BOARD_DELETE,
                 bno);
+        return result;
     }
 
     /**
@@ -97,9 +93,10 @@ public class BoardDAOImpl implements IBoardDAO {
      * @author zeonghun
      * @since 2023.04.19
      */
-    public void updateBoard(BoardDTO board) {
-        jdbcTemplate.update(
+    public int updateBoard(BoardDTO board) {
+        int result = jdbcTemplate.update(
                 Query.BOARD_UPDATE,
                 board.getTitle(), board.getWriter(), board.getContent(), board.getBno());
+        return result;
     }
 }

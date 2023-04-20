@@ -3,6 +3,7 @@ package kr.ymtech.ojt.http_method.board.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,7 @@ import kr.ymtech.ojt.http_method.board.service.IBoardService;
  * 게시물 조회, 추가, 삭제, 수정
  * 
  * @author zeonghun
- * @since 2023.04.17
+ * @since 2023.04.19
  */
 @RestController
 @RequestMapping("/boards")
@@ -40,6 +41,7 @@ public class BoardController {
      */
     @GetMapping
     public List<BoardDTO> showAllBoards() {
+
         return service.findAll();
     }
 
@@ -49,11 +51,17 @@ public class BoardController {
      * @return 게시물 조회
      * 
      * @author zeonghun
-     * @since 2023.04.17
+     * @since 2023.04.19
      */
     @GetMapping("/{bno}")
-    public BoardDTO showBoards(@PathVariable int bno) {
-        return service.findOne(bno);
+    public ResponseEntity<BoardDTO> showBoards(@PathVariable int bno) {
+
+        BoardDTO result = service.findOne(bno);
+
+        if (result == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     /**
@@ -62,11 +70,17 @@ public class BoardController {
      * @return 추가 게시물
      * 
      * @author zeonghun
-     * @since 2023.04.17
+     * @since 2023.04.19
      */
     @PostMapping
     public ResponseEntity<BoardDTO> createBoard(@RequestBody BoardDTO board) {
-        return service.createBoard(board);
+        
+        BoardDTO result = service.createBoard(board);
+
+        if (result == null) {
+            return new ResponseEntity<BoardDTO>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     /**
@@ -75,11 +89,17 @@ public class BoardController {
      * @return 삭제 게시물
      * 
      * @author zeonghun
-     * @since 2023.04.17
+     * @since 2023.04.19
      */
     @DeleteMapping("/delete/{bno}")
     public ResponseEntity<BoardDTO> deleteBoard(@PathVariable int bno) {
-        return service.deleteBoard(bno);
+
+        BoardDTO result = service.deleteBoard(bno);
+
+        if (result == null) {
+            return new ResponseEntity<BoardDTO>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     /**
@@ -88,10 +108,16 @@ public class BoardController {
      * @return 수정 게시물
      * 
      * @author zeonghun
-     * @since 2023.04.17
+     * @since 2023.04.19
      */
     @PatchMapping
     public ResponseEntity<UpdateBoardResDTO> updateBoard(@RequestBody BoardDTO board) {
-        return service.updateBoard(board);
+
+        UpdateBoardResDTO result = service.updateBoard(board);
+
+        if (result == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

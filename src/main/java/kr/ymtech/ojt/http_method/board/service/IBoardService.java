@@ -2,8 +2,6 @@ package kr.ymtech.ojt.http_method.board.service;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
-
 import kr.ymtech.ojt.http_method.board.dto.BoardDTO;
 import kr.ymtech.ojt.http_method.board.dto.UpdateBoardResDTO;
 
@@ -27,7 +25,7 @@ public interface IBoardService {
      * @return 조회 게시물
      * 
      * @author zeonghun
-     * @since 2023.04.17
+     * @since 2023.04.19
      */
     public BoardDTO findOne(int bno);
 
@@ -39,9 +37,9 @@ public interface IBoardService {
      * @return 추가 게시물
      * 
      * @author zeonghun
-     * @since 2023.04.17
+     * @since 2023.04.19
      */
-    public ResponseEntity<BoardDTO> createBoard(BoardDTO board);
+    public BoardDTO createBoard(BoardDTO board);
 
     /**
      * 게시물 삭제
@@ -51,9 +49,9 @@ public interface IBoardService {
      * @return 삭제 게시물
      * 
      * @author zeonghun
-     * @since 2023.04.17
+     * @since 2023.04.19
      */
-    public ResponseEntity<BoardDTO> deleteBoard(int bno);
+    public BoardDTO deleteBoard(int bno);
 
     /**
      * 게시물 수정
@@ -63,7 +61,7 @@ public interface IBoardService {
      * @return 수정 게시물
      * 
      * @author zeonghun
-     * @since 2023.04.17
+     * @since 2023.04.19
      */
-    public ResponseEntity<UpdateBoardResDTO> updateBoard(BoardDTO board);
+    public UpdateBoardResDTO updateBoard(BoardDTO board);
 }

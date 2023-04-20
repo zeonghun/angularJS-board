@@ -35,9 +35,9 @@ public interface IBoardDAO {
      * @param board 추가할 게시물
      * 
      * @author zeonghun
-     * @since 2023.04.17
+     * @since 2023.04.19
      */
-    public void createBoard(BoardDTO board);
+    public int createBoard(BoardDTO board);
 
     /**
      * 게시물 삭제
@@ -45,9 +45,9 @@ public interface IBoardDAO {
      * @param board 삭제할 게시물
      * 
      * @author zeonghun
-     * @since 2023.04.17
+     * @since 2023.04.19
      */
-    public void deleteBoard(int bno);
+    public int deleteBoard(int bno);
 
     /**
      * 게시물 수정UpdateBoardResDTO
@@ -55,7 +55,7 @@ public interface IBoardDAO {
      * @param board 수정할 게시물
      * 
      * @author zeonghun
-     * @since 2023.04.17
+     * @since 2023.04.19
      */
-    public void updateBoard(BoardDTO board);
+    public int updateBoard(BoardDTO board);
 }
