@@ -102,21 +102,14 @@ public class BoardServiceImpl implements IBoardService {
     @Override
     public BoardDTO deleteBoard(int bno) {
 
-        List<BoardDTO> boardList = this.findAll();
-        BoardDTO boardDTO = new BoardDTO(bno, null, null, null);
+        // 삭제 게시물 조회
+        BoardDTO boardDTO = this.findOne(bno);
 
-        for (int i = 0; i < boardList.size(); i++) {
-
-            // DB에 삭제할 bno가 존재하는 경우
-            if (boardList.get(i).getBno() == bno) {
-                int result = dao.deleteBoard(bno);
-
-                // 게시물 삭제 결과가 1개 행인 경우
-                if (result > 0) {
-                    boardDTO = boardList.get(i);
-                    return boardDTO;
-                }
-            }
+        int result = dao.deleteBoard(bno);
+        
+        // 게시물 삭제 결과가 1개 행인 경우
+        if (result > 0) {
+            return boardDTO;
         }
         return null;
     }
