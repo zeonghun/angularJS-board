@@ -3,6 +3,7 @@ package kr.ymtech.ojt.http_method.board.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -48,15 +49,19 @@ public class BoardDAOImpl implements IBoardDAO {
      */
     @Override
     public BoardVO findOne(int bno) {
-        BoardVO boardVO = jdbcTemplate.queryForObject(
-                Query.BOARD_READ,
-                (rs, count) -> new BoardVO(rs.getInt("bno"),
-                        rs.getString("title"),
-                        rs.getString("writer"),
-                        rs.getString("content")),
-                bno);
-
-        return boardVO;
+        try {
+            BoardVO boardVO = jdbcTemplate.queryForObject(
+                    Query.BOARD_READ,
+                    (rs, count) -> new BoardVO(rs.getInt("bno"),
+                            rs.getString("title"),
+                            rs.getString("writer"),
+                            rs.getString("content")),
+                    bno);
+            return boardVO;
+            // queryForObject 결과값이 0일 경우
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     /**
@@ -93,6 +98,7 @@ public class BoardDAOImpl implements IBoardDAO {
      * @author zeonghun
      * @since 2023.04.19
      */
+    @Override
     public int updateBoard(BoardDTO board) {
         int result = jdbcTemplate.update(
                 Query.BOARD_UPDATE,

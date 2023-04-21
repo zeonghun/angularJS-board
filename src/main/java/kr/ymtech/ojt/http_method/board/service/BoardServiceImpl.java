@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import kr.ymtech.ojt.http_method.board.dao.IBoardDAO;
@@ -45,9 +44,11 @@ public class BoardServiceImpl implements IBoardService {
     public BoardDTO findOne(int bno) {
         BoardDTO boardDTO = new BoardDTO(bno, null, null, null);
 
-        try {
-            BoardVO boardVO = dao.findOne(bno);
-
+        BoardVO boardVO = dao.findOne(bno);
+        
+        if (boardVO == null) {
+            return null;
+        } else {
             // VO -> DTO
             boardDTO.setBno(boardVO.getBno());
             boardDTO.setTitle(boardVO.getTitle());
@@ -55,10 +56,6 @@ public class BoardServiceImpl implements IBoardService {
             boardDTO.setContent(boardVO.getContent());
 
             return boardDTO;
-
-            // queryForObject 결과값이 0일 경우
-        } catch (EmptyResultDataAccessException e) {
-            return null;
         }
     }
 
