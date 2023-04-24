@@ -1,5 +1,7 @@
 package kr.ymtech.ojt.http_method.board.dto;
 
+import javax.validation.constraints.NotBlank;
+
 import kr.ymtech.ojt.http_method.board.vo.BoardVO;
 
 /**
@@ -10,8 +12,11 @@ import kr.ymtech.ojt.http_method.board.vo.BoardVO;
  */
 public class BoardDTO {
     private int bno;
+    @NotBlank
     private String title;
+    @NotBlank
     private String writer;
+    @NotBlank
     private String content;
 
     public BoardDTO(int bno, String title, String writer, String content) {

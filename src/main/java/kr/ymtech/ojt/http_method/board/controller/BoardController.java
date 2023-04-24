@@ -2,6 +2,8 @@ package kr.ymtech.ojt.http_method.board.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -73,7 +75,7 @@ public class BoardController {
      * @since 2023.04.19
      */
     @PostMapping
-    public ResponseEntity<BoardDTO> createBoard(@RequestBody BoardDTO board) {
+    public ResponseEntity<BoardDTO> createBoard(@RequestBody @Valid BoardDTO board) {
         
         BoardDTO result = service.createBoard(board);
 
@@ -111,7 +113,7 @@ public class BoardController {
      * @since 2023.04.19
      */
     @PatchMapping
-    public ResponseEntity<UpdateBoardResDTO> updateBoard(@RequestBody BoardDTO board) {
+    public ResponseEntity<UpdateBoardResDTO> updateBoard(@RequestBody @Valid BoardDTO board) {
 
         UpdateBoardResDTO result = service.updateBoard(board);
 
