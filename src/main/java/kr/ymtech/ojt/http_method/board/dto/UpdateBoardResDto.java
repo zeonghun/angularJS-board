@@ -6,24 +6,24 @@ package kr.ymtech.ojt.http_method.board.dto;
  * @author zeonghun
  * @since 2023.04.17
  */
-public class UpdateBoardResDTO {
+public class UpdateBoardResDto {
 
-    private BoardDTO old;
-    private BoardDTO update;
+    private BoardDto old;
+    private BoardDto update;
 
-    public BoardDTO getOld() {
+    public BoardDto getOld() {
         return old;
     }
 
-    public BoardDTO getUpdate() {
+    public BoardDto getUpdate() {
         return update;
     }
 
-    public void setOld(BoardDTO old) {
+    public void setOld(BoardDto old) {
         this.old = old;
     }
 
-    public void setUpdate(BoardDTO update) {
+    public void setUpdate(BoardDto update) {
         this.update = update;
     }
 

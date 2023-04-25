@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.7.10</version>
+		<relativePath /> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>kr.ymtech.ojt</groupId>
+	<artifactId>http_method</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>http_method</name>
+	<description>Demo project for Spring Boot</description>
+	<properties>
+		<java.version>1.8</java.version>
+
+		<open-commons-core.version>2.0.0-SNAPSHOT</open-commons-core.version>
+		<open-commons-spring-jdbc.version>0.4.0-SNAPSHOT</open-commons-spring-jdbc.version>
+		<open-commons-spring-web.version>0.5.0-SNAPSHOT</open-commons-spring-web.version>
+
+		<log4j2.version>2.17.1</log4j2.version>
+
+		<!-- build.profile 은 mvn cli parameter로 전달받는다. -->
+		<!-- mvn clean package -Dbuild.profile={value} -->
+		<build.profile></build.profile>
+
+		<!-- begin: build -->
+		<build.finalName>convergence-web</build.finalName>
+		<manifest.mainClass>kr.re.etri.mcip.convergence.ConvergenceWebApplication</manifest.mainClass>
+		<deploy.directory>deploy</deploy.directory>
+		<!-- end: build -->
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>YMTECH Maven Repository</id>
+			<name>ymtech-maven-repo</name>
+			<url>http://nexus3.ymtech.co.kr/repository/maven-public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>8.0.32</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.mariadb.jdbc</groupId>
+			<artifactId>mariadb-java-client</artifactId>
+			<version>3.1.3</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+		<!-- ************** -->
+		<!-- begin: jackson -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-yaml</artifactId>
+		</dependency>
+		<!-- end: jackson -->
+		<!-- ************** -->
+
+		<!-- ************** -->
+		<!-- begin: open.commons -->
+		<dependency>
+			<groupId>open.commons</groupId>
+			<artifactId>open-commons-core</artifactId>
+			<version>${open-commons-core.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>open.commons</groupId>
+			<artifactId>open-commons-spring-jdbc</artifactId>
+			<version>${open-commons-spring-jdbc.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>open.commons</groupId>
+			<artifactId>open-commons-spring-web</artifactId>
+			<version>${open-commons-spring-web.version}</version>
+		</dependency>
+		<!-- end: open.commons -->
+		<!-- ************** -->
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

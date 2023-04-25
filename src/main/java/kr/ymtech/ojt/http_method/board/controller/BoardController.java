@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.ymtech.ojt.http_method.board.dto.BoardDTO;
-import kr.ymtech.ojt.http_method.board.dto.UpdateBoardResDTO;
+import kr.ymtech.ojt.http_method.board.dto.BoardDto;
+import kr.ymtech.ojt.http_method.board.dto.UpdateBoardResDto;
 import kr.ymtech.ojt.http_method.board.service.IBoardService;
 
 /**
@@ -42,7 +42,7 @@ public class BoardController {
      * @since 2023.04.17
      */
     @GetMapping
-    public List<BoardDTO> showAllBoards() {
+    public List<BoardDto> showAllBoards() {
 
         return service.findAll();
     }
@@ -56,9 +56,9 @@ public class BoardController {
      * @since 2023.04.19
      */
     @GetMapping("/{bno}")
-    public ResponseEntity<BoardDTO> showBoards(@PathVariable int bno) {
+    public ResponseEntity<BoardDto> showBoards(@PathVariable int bno) {
 
-        BoardDTO result = service.findOne(bno);
+        BoardDto result = service.findOne(bno);
 
         if (result == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -75,12 +75,12 @@ public class BoardController {
      * @since 2023.04.19
      */
     @PostMapping
-    public ResponseEntity<BoardDTO> createBoard(@RequestBody @Valid BoardDTO board) {
-        
-        BoardDTO result = service.createBoard(board);
+    public ResponseEntity<BoardDto> createBoard(@RequestBody @Valid BoardDto board) {
+
+        BoardDto result = service.createBoard(board);
 
         if (result == null) {
-            return new ResponseEntity<BoardDTO>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<BoardDto>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
@@ -94,12 +94,12 @@ public class BoardController {
      * @since 2023.04.19
      */
     @DeleteMapping("/delete/{bno}")
-    public ResponseEntity<BoardDTO> deleteBoard(@PathVariable int bno) {
+    public ResponseEntity<BoardDto> deleteBoard(@PathVariable int bno) {
 
-        BoardDTO result = service.deleteBoard(bno);
+        BoardDto result = service.deleteBoard(bno);
 
         if (result == null) {
-            return new ResponseEntity<BoardDTO>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<BoardDto>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
@@ -113,9 +113,9 @@ public class BoardController {
      * @since 2023.04.19
      */
     @PatchMapping
-    public ResponseEntity<UpdateBoardResDTO> updateBoard(@RequestBody @Valid BoardDTO board) {
+    public ResponseEntity<UpdateBoardResDto> updateBoard(@RequestBody @Valid BoardDto board) {
 
-        UpdateBoardResDTO result = service.updateBoard(board);
+        UpdateBoardResDto result = service.updateBoard(board);
 
         if (result == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

@@ -2,7 +2,8 @@ package kr.ymtech.ojt.http_method.board.dto;
 
 import javax.validation.constraints.NotBlank;
 
-import kr.ymtech.ojt.http_method.board.vo.BoardVO;
+import kr.ymtech.ojt.http_method.board.vo.BoardVo;
+import open.commons.core.Result;
 
 /**
  * 게시물 항목 저장 클래스
@@ -10,7 +11,8 @@ import kr.ymtech.ojt.http_method.board.vo.BoardVO;
  * @author zeonghun
  * @since 2023.04.17
  */
-public class BoardDTO {
+public class BoardDto {
+    
     private int bno;
     @NotBlank
     private String title;
@@ -19,18 +21,25 @@ public class BoardDTO {
     @NotBlank
     private String content;
 
-    public BoardDTO(int bno, String title, String writer, String content) {
+    public BoardDto(int bno, String title, String writer, String content) {
         this.bno = bno;
         this.title = title;
         this.writer = writer;
         this.content = content;
     }
 
-    public BoardDTO(BoardVO boardVO) {
+    public BoardDto(BoardVo boardVO) {
         this.bno = boardVO.getBno();
         this.title = boardVO.getTitle();
         this.writer = boardVO.getWriter();
         this.content = boardVO.getContent();
+    }
+
+    public BoardDto(Result<BoardVo> boardVO) {
+        this.bno = boardVO.getData().getBno();
+        this.title = boardVO.getData().getTitle();
+        this.writer = boardVO.getData().getWriter();
+        this.content = boardVO.getData().getContent();
     }
 
     public int getBno() {

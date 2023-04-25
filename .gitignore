@@ -8,7 +8,6 @@ mvnw
 mvnw.cmd
 package-lock.json
 package.json
-pom.xml
 
 ### STS ###
 .apt_generated

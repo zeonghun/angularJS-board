@@ -2,8 +2,8 @@ package kr.ymtech.ojt.http_method.board.service;
 
 import java.util.List;
 
-import kr.ymtech.ojt.http_method.board.dto.BoardDTO;
-import kr.ymtech.ojt.http_method.board.dto.UpdateBoardResDTO;
+import kr.ymtech.ojt.http_method.board.dto.BoardDto;
+import kr.ymtech.ojt.http_method.board.dto.UpdateBoardResDto;
 
 public interface IBoardService {
 
@@ -15,7 +15,7 @@ public interface IBoardService {
      * @author zeonghun
      * @since 2023.04.17
      */
-    public List<BoardDTO> findAll();
+    public List<BoardDto> findAll();
 
     /**
      * 게시물 조회
@@ -27,7 +27,7 @@ public interface IBoardService {
      * @author zeonghun
      * @since 2023.04.19
      */
-    public BoardDTO findOne(int bno);
+    public BoardDto findOne(int bno);
 
     /**
      * 게시물 추가
@@ -39,7 +39,7 @@ public interface IBoardService {
      * @author zeonghun
      * @since 2023.04.19
      */
-    public BoardDTO createBoard(BoardDTO board);
+    public BoardDto createBoard(BoardDto board);
 
     /**
      * 게시물 삭제
@@ -51,7 +51,7 @@ public interface IBoardService {
      * @author zeonghun
      * @since 2023.04.19
      */
-    public BoardDTO deleteBoard(int bno);
+    public BoardDto deleteBoard(int bno);
 
     /**
      * 게시물 수정
@@ -63,5 +63,5 @@ public interface IBoardService {
      * @author zeonghun
      * @since 2023.04.19
      */
-    public UpdateBoardResDTO updateBoard(BoardDTO board);
+    public UpdateBoardResDto updateBoard(BoardDto board);
 }
