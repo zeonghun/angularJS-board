@@ -27,7 +27,7 @@ public class BoardDto {
         this.writer = writer;
         this.content = content;
     }
-
+    
     public BoardDto(BoardVo boardVO) {
         this.bno = boardVO.getBno();
         this.title = boardVO.getTitle();
@@ -72,5 +72,10 @@ public class BoardDto {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return "BoardDto [bno=" + bno + ", title=" + title + ", writer=" + writer + ", content=" + content + "]";
     }
 }

@@ -8,3 +8,11 @@ spring:
   messagesource:
     basename: classpath:querySource
     default-encoding: UTF-8
+  mvc:
+    static-path-pattern: /static/**
+  thymeleaf:
+    prefix: classpath:views/
+    suffix: .html
+    check-template-location: true
+    mode: HTML
+    cache: false

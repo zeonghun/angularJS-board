@@ -32,6 +32,7 @@ public class BoardServiceImpl implements IBoardService {
         for (int i = 0; i < boardVOList.getData().size(); i++) {
             boardDTOList.add(new BoardDto(boardVOList.getData().get(i)));
         }
+
         return boardDTOList;
     }
 

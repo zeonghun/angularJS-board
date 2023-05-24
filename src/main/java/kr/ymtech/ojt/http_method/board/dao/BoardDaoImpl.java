@@ -17,7 +17,7 @@ import open.commons.core.function.SQLConsumer;
  */
 @Repository
 public class BoardDaoImpl extends AbstractMariadbDao<BoardVo> implements IBoardDao {
-
+    
     public BoardDaoImpl() {
         super(BoardVo.class);
     }
@@ -31,7 +31,7 @@ public class BoardDaoImpl extends AbstractMariadbDao<BoardVo> implements IBoardD
     @Override
     public Result<List<BoardVo>> findAll() {
         String query = getQuery("boardDao.select.all");
-
+        
         if (logger.isDebugEnabled()) {
             logger.debug("Query: " + query);
             logger.info("Parameters: null");
@@ -54,7 +54,7 @@ public class BoardDaoImpl extends AbstractMariadbDao<BoardVo> implements IBoardD
             logger.debug("Query: " + query);
             logger.info("Parameters: " + bno);
         }
-
+        
         return getObject(query, SQLConsumer.setParameters(bno), BoardVo.class);
     }
 
@@ -70,11 +70,11 @@ public class BoardDaoImpl extends AbstractMariadbDao<BoardVo> implements IBoardD
 
         if (logger.isDebugEnabled()) {
             logger.debug("Query: " + query);
-            logger.info("Parameters: ", String.join(", ", String.valueOf(board.getBno()), board.getTitle(),board.getWriter(), board.getContent()));
+            logger.info("Parameters: ", String.join(", ", board.getTitle(),board.getWriter(), board.getContent()));
         }
-
+        
         return executeUpdate(query, SQLConsumer.setParameters(
-                new Object[] { board.getBno(), board.getTitle(), board.getWriter(), board.getContent()}));
+                new Object[] {board.getTitle(), board.getWriter(), board.getContent()}));
     }
 
     /**
@@ -91,7 +91,7 @@ public class BoardDaoImpl extends AbstractMariadbDao<BoardVo> implements IBoardD
             logger.debug("Query: " + query);
             logger.info("Parameters: " + bno);
         }
-
+    
         return executeUpdate(query, SQLConsumer.setParameters(bno));
     }
 
@@ -104,7 +104,7 @@ public class BoardDaoImpl extends AbstractMariadbDao<BoardVo> implements IBoardD
     @Override
     public Result<Integer> updateBoard(BoardDto board) {
         String query = getQuery("boardDao.update");
-
+        
         if (logger.isDebugEnabled()) {
             logger.debug("Query: " + query);
             logger.info("Parameters: ", String.join(", ", board.getTitle(), board.getWriter(), board.getContent(), String.valueOf(board.getBno())));

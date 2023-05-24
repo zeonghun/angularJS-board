@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="convergence">
+
+<head th:include="taglibs.html :: taglibs" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board</title>
+
+    <!--<link rel="stylesheet" href="style.css" type="text/css" />-->
+
+    <script type="text/javascript">
+
+        var APP_NAME = "convergence";
+        var convergence = angular.module(APP_NAME, ["ngRoute", "ngResource", "ngAnimate", "ngSanitize", "ui.bootstrap", "ngMessages", "ngCookies", "ngFileUpload"]);
+
+    </script>
+
+    <script type="text/javascript" th:src="@{/static/scripts/ctrl/ftr_board.js}"></script>
+    <script type="text/javascript" th:src="@{/static/scripts/ctrl/res_board.js}"></script>
+    <script type="text/javascript" th:src="@{/static/scripts/ctrl/ctrl_board.js}"></script>
+</head>
+
+<body ng-controller="ConvergenceCtrl">
+    <div class="container mt-5">
+
+        <!-- 입력 Form -->
+        <br/>
+        <form ng-submit="insertBoard(board)">
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">Title</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" ng-model="board.title">
+            </div><br/>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">Writer</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" ng-model="board.writer">
+            </div><br/>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">Content</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" ng-model="board.content">
+            </div>
+            <br/>
+            <button type="submit" class="btn btn-dark">추가</button>
+        </form><br /><br />
+
+        <!-- 게시판 -->
+        <table class="table">
+            <tr>
+                <th scope="col" style="width:10px">No</td>
+                <th scope="col" style="width:30px">Title</td>
+                <th scope="col" style="width:10px">Writer</td>
+                <th scope="col" style="width:50px">Content</td>
+                <th scope="col" style="text-align: center">비고</td>
+            </tr>
+
+            <tr ng-repeat="board in boardList">
+                <th scope="row" style="width:10px" ng-click="toggleClicked(board)">{{$index + 1}}</th>
+                <td style="width:30px" ng-click="toggleClicked(board)">{{board.title}}</td>
+                <td style="width:10px" ng-click="toggleClicked(board)">{{board.writer}}</td>
+                <td style="width:50px" ng-click="toggleClicked(board)">{{board.content}}</td>
+                <td style="width:50px; text-align: center"><button type="button" class="btn btn-dark" ng-click="deleteBoard(board.bno)">삭제</button></td>
+            </tr>
+        </table>
+        
+        <!-- 수정 Form -->
+        <form ng-if="clicked" ng-submit="updateBoard(selectedBoard)">
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">Title</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" ng-model="selectedBoard.title">
+            </div><br/>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">Writer</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" ng-model="selectedBoard.writer">
+            </div><br/>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">Content</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" ng-model="selectedBoard.content">
+            </div>
+            <br/>
+            <button type="submit" class="btn btn-dark">수정</button>
+        </form><br /><br /><br />
+    </div>
+
+</body>
+
+</html>
