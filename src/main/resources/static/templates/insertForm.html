@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="convergence">
+
+<head th:include="taglibs.html :: taglibs" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Board</title>
+    <script type="text/javascript">
+        var APP_NAME = "convergence";
+        var convergence = angular.module(APP_NAME, ["ngRoute", "ngResource", "ngAnimate", "ngSanitize", "ui.bootstrap", "ngMessages", "ngCookies", "ngFileUpload"]);
+    </script>
+    <script type="text/javascript" th:src="@{/static/scripts/ctrl/ftr_board.js}"></script>
+    <script type="text/javascript" th:src="@{/static/scripts/ctrl/res_board.js}"></script>
+    <script type="text/javascript" th:src="@{/static/scripts/ctrl/ctrl_board.js}"></script>
+</head>
+
+<body ng-controller="ConvergenceCtrl">
+    <div class="container">
+        <!-- Insert Form -->
+        <br /><br />
+        <h2>게시물 추가</h2>
+        <br /><br />
+        <!-- <form ng-submit="insertBoard(board)"> -->
+        <form>
+            <div>
+                <label for="formGroupExampleInput" class="form-label">Title</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" ng-model="board.title">
+            </div><br />
+            <div>
+                <label for="formGroupExampleInput" class="form-label">Writer</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" ng-model="board.writer">
+            </div><br />
+            <div>
+                <label for="formGroupExampleInput" class="form-label">Content</label>
+                <input type="text" class="form-control" id="formGroupExampleInput" ng-model="board.content">
+            </div>
+            <br />
+            <!--<button type="submit" class="btn btn-dark" style="margin-right: 10px;" onclick="location.href='/';">추가</button>-->
+            <a href="#!/" ng-click="boardShowHide(); insertBoard(board);"><button type="button" class="btn btn-dark" style="margin-right: 10px;">추가</button></a>
+            <a href="#!/" ng-click="boardShowHide()"><button type="button" class="btn btn-dark">취소</button></a>
+        </form>
+    </div>
+</body>
+
+</html>

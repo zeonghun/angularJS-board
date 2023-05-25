@@ -13,6 +13,8 @@ public class WebSecurityConfig extends SpringfoxSwaggerWebSecurityCofigurer {
     public void configure(WebSecurity web) throws Exception {
 
         web.ignoring()
+                .antMatchers("/**")
+                .antMatchers("/main")
                 .antMatchers("/static/**")
                 .antMatchers("/register/**")
                 .antMatchers("/test/**")
@@ -20,7 +22,9 @@ public class WebSecurityConfig extends SpringfoxSwaggerWebSecurityCofigurer {
                 //             .antMatchers("/api/**")
                 .antMatchers("/login")
                 .antMatchers("/error")
-                .antMatchers("/boards/**");
+                .antMatchers("/boards/**")
+                .antMatchers("/insertForm")
+                .antMatchers("/updateForm");
     }
 
     @Override

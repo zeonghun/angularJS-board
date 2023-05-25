@@ -8,7 +8,16 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
     @RequestMapping("/")
     public ModelAndView showBoard() {
-
         return new ModelAndView("main");
     }
+
+    // @RequestMapping("/insertForm")
+    // public ModelAndView insertFormView() {
+    //     return new ModelAndView("insertForm");
+    // }
+
+    // @RequestMapping("/updateForm")
+    // public ModelAndView updateFormView() {
+    //     return new ModelAndView("updateForm");
+    // }
 }
