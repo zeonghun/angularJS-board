@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="convergence">
+<html lang="en" ng-app = "convergence">
 
 <head th:include="taglibs.html :: taglibs" />
 
@@ -16,6 +16,7 @@
     <script type="text/javascript" th:src="@{/static/scripts/ctrl/ftr_board.js}"></script>
     <script type="text/javascript" th:src="@{/static/scripts/ctrl/res_board.js}"></script>
     <script type="text/javascript" th:src="@{/static/scripts/ctrl/ctrl_board.js}"></script>
+    <script type="text/javascript" th:src="@{/static/scripts/ctrl/modal.js}"></script>
 </head>
 
 <body ng-controller="ConvergenceCtrl">
@@ -66,7 +67,7 @@
                     <td ng-click="toggleClicked(board)">{{board.content}}</td>
                     <td style="text-align: center;"><a href="#!/updateForm"><button type="button" class="btn btn-dark"
                                 style="margin-right: 10px;" ng-click="updateButtonClick(board); boardShowHide();" >수정</button></a>
-                        <button type="button" class="btn btn-dark" ng-click="deleteBoard(board.bno)">삭제</button>
+                        <button type="button" class="btn btn-dark" ng-click="deleteBoard(board.bno); openModal();">삭제</button>
                     </td>
                 </tr>
             </table>

@@ -1,28 +1,27 @@
-
 var dashboardFactory = new BoardFactory();
 convergence.factory("BoardFactory", dashboardFactory.boardFactory);
 
-convergence.config(function($routeProvider){
+convergence.config(function ($routeProvider) {
     $routeProvider
-    // .when("/", {
-    //     templateUrl: "main"
-    // })
-    .when("/insertForm", {
-        templateUrl: "/static/templates/insertForm.html"
-    })
-    .when("/updateForm", {
-        templateUrl: "/static/templates/updateForm.html"
-    })
+        // .when("/", {
+        //     templateUrl: "main"
+        // })
+        .when("/insertForm", {
+            templateUrl: "/static/templates/insertForm.html"
+        })
+        .when("/updateForm", {
+            templateUrl: "/static/templates/updateForm.html"
+        })
 });
 
-convergence.controller("ConvergenceCtrl", function ($scope, $route, $http, $timeout, $window //
+convergence.controller("ConvergenceCtrl", function ($scope, $uibModal, $route, $http, $timeout, $window //
     , BoardFactory) {
 
     $scope.boardList = [];
 
     $scope.clicked = false;
     $scope.showBoard = true;
-    
+
     /**
      * 전체 게시물 조회
      * 
@@ -186,11 +185,21 @@ convergence.controller("ConvergenceCtrl", function ($scope, $route, $http, $time
     /**
      * 추가, 수정, 취소 버튼 클릭 시, 게시판 Show/Hide
      */
-    $scope.boardShowHide = function(){
+    $scope.boardShowHide = function () {
         $scope.showBoard = !$scope.showBoard;
     }
 
+    $scope.openModal = function () {
+        var modalInstance = $uibModal.open({
+            templateUrl: "/static/templates/modalContent.html",
+            controller: "ModalContentCtrl",
+            size: '',
+        });
 
+        modalInstance.result.then(function (response) {
+
+        });
+    };
 
     // /**
     //  * pagination
